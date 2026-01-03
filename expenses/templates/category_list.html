@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">My categories</h1>
+
+        <div class="space-x-2">
+            <a href="{% url 'expenses:category_create' %}"
+                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                + New category
+            </a>
+
+            <a href="{% url 'expenses:expense_create' %}"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                + New expense
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow divide-y">
+        <ul class="space-y-2">
+            {% for category in categories %}
+            <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                <span>{{ category.name }}</span>
+
+                <div class="space-x-2">
+                    <a href="{% url 'expenses:category_update' category.id %}" class="text-blue-600 hover:underline">
+                        Editar
+                    </a>
+
+                    <a href="{% url 'expenses:category_delete' category.id %}" class="text-red-600 hover:underline">
+                        Eliminar
+                    </a>
+                </div>
+            </li>
+            {% empty %}
+            <li>No hay categorías</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}

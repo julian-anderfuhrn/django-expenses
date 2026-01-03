@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}New expense{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto bg-white shadow rounded-xl p-6">
+    <h2 class="text-2xl font-bold mb-6">
+        New expense
+    </h2>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Category field + create button -->
+        <div>
+            <label class="block text-sm font-medium mb-1">
+                Category
+            </label>
+
+            <div class="flex gap-2">
+                {{ form.category }}
+
+                <a href="{% url 'expenses:category_create' %}"
+                    class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition text-sm whitespace-nowrap">
+                    + New category
+                </a>
+            </div>
+
+            {% if form.category.errors %}
+            <p class="text-red-500 text-sm mt-1">
+                {{ form.category.errors }}
+            </p>
+            {% endif %}
+        </div>
+
+        <!-- Rest of fields -->
+        <div>
+
+            {{ form.amount.label_tag }}
+            {{ form.amount }}
+        </div>
+        <div>
+
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div>
+
+            {{ form.date.label_tag }}
+            {{ form.date }}
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-4">
+            <a href="{% url 'expenses:expense_list' %}"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+                Cancel
+            </a>
+
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

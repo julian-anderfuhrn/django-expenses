@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Delete expense{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white shadow rounded-lg p-6">
+    <h2 class="text-xl font-bold text-red-600 mb-4">Delete expens</h2>
+
+    <p class="mb-6">
+        ¿Are you sure you want to delete
+        <strong>{{ expense.description }}</strong>
+        for <strong>${{ expense.amount }}</strong>?
+    </p>
+
+    <form method="post" class="flex justify-between">
+        {% csrf_token %}
+        <a href="{% url 'expenses:expense_list' %}" class="text-gray-600 hover:underline">
+            Cancel
+        </a>
+
+        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+            Yes, delete
+        </button>
+    </form>
+</div>
+{% endblock %}

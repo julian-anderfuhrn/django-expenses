@@ -1,27 +1,19 @@
 from django.urls import path
-from .views import (
-    dashboard,
-    expense_list,
-    expense_create,
-    expense_update,
-    expense_delete,
-    category_list,
-    category_create,
-    category_update,
-    category_delete,
-)
+from . import views
 
 
 app_name = "expenses"
 
 urlpatterns = [
-    path("", expense_list, name="expense_list"),
-    path("dashboard/", dashboard, name="dashboard"),
-    path("create/", expense_create, name="expense_create"),
-    path("categories/", category_list, name="category_list"),
-    path("categories/create", category_create, name="category_create"),
-    path("categories/<int:pk>/edit", category_update, name="category_update"),
-    path("categories/<int:pk>/delete", category_delete, name="category_delete"),
-    path("<int:pk>/edit/", expense_update, name="expense_update"),
-    path("<int:pk>/delete/", expense_delete, name="expense_delete"),
+    # Expenses
+    path("", views.expense_list, name="expense_list"),
+    path("dashboard/", views.dashboard, name="dashboard"),
+    path("create/", views.expense_create, name="expense_create"),
+    path("<int:pk>/edit/", views.expense_update, name="expense_update"),
+    path("<int:pk>/delete/", views.expense_delete, name="expense_delete"),
+    # Categories
+    path("categories/", views.category_list, name="category_list"),
+    path("categories/create/", views.category_create, name="category_create"),
+    path("categories/<int:pk>/edit/", views.category_update, name="category_update"),
+    path("categories/<int:pk>/delete/", views.category_delete, name="category_delete"),
 ]

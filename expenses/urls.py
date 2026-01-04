@@ -1,15 +1,16 @@
 from django.urls import path
 from .views import (
+    dashboard,
     expense_list,
     expense_create,
-    category_list,
-    category_create,
-    category_delete,
-    category_update,
     expense_update,
     expense_delete,
-    dashboard,
+    category_list,
+    category_create,
+    category_update,
+    category_delete,
 )
+
 
 app_name = "expenses"
 

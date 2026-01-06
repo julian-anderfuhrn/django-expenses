@@ -20,7 +20,7 @@ def login_view(request):
             login(request, user)
             return redirect("expenses:dashboard")
         else:
-            messages.error(request, "usuario o contraseña incorrectos")
+            messages.error(request, "Invalid username or password")
 
     return render(request, "login.html")
 
@@ -33,11 +33,11 @@ def register(request):
         password2 = request.POST.get("password2")
 
         if password1 != password2:
-            messages.error(request, "Las contraseñas no coinciden")
-            return redirect("expenses:dashboard")
+            messages.error(request, "The passwords do not match")
+            return redirect("register")
 
         if User.objects.filter(username=username).exists():
-            messages.error(request, "El usuario ya existe")
+            messages.error(request, "The username is already taken")
             return redirect("register")
 
         user = User.objects.create_user(
@@ -45,7 +45,7 @@ def register(request):
         )
 
         login(request, user)
-        return redirect("index")
+        return redirect("expenses:dashboard")
 
     return render(request, "register.html")
 
